@@ -73,7 +73,9 @@ setup_sp:
 	// quest: boot. set sp to somewhere above PHYS_BASE, far away from kernel image
 	/* STUDENT_TODO: your code here */
 	// NB: we aren't use sp yet -- until we start to execute kernel_main(below)
-
+	ldr sp, =kernel_end
+	add sp, sp, #4096
+	
 	// install irq vectors
 	ldr x0, =vectors	// load VBAR_EL1 vector table addr
 	msr	vbar_el1, x0	

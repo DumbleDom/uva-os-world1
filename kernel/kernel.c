@@ -20,9 +20,9 @@ struct cpu cpus[NCPU];
 
 void kernel_main() {
 	// Q4 quest
-	/* STUDENT_TODO: your code here */
+	uart_init();
 	// Q4 quest
-	/* STUDENT_TODO: your code here */
+	init_printf();
 	printf("------ kernel boot ------  core %d\n\r", cpuid());
 	printf("build time (kernel.c) %s %s\n", __DATE__, __TIME__); // simplicity 
 

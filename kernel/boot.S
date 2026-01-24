@@ -62,6 +62,11 @@ el1_entry:
 	/* Below: clean up bss region. 
 	  bss_begin/end must be 8 bytes aligned, per the linker script */
 	// quest: boot
+	
+	ldr x0, =bss_start  //load bss_start into x0 as required by memzero_aligned
+	ldr x1, =bss_end  //load bss_end into x1
+	sub x1, x1, x0  //X1 is the size of the bss as required by memzero_aligned
+
 	bl 	memzero_aligned
 	
 setup_sp: 	

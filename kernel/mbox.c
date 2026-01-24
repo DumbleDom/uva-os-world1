@@ -274,17 +274,14 @@ static int do_fb_init(struct fb_struct *fbs) {
         && mbox[28]!=0 /*framebuf*/) {
         // extract framebuf info from resp...
         mbox[28]&=0x3FFFFFFF;  
-        // quest: OS logo
-        // save framebuf ptr to fbs->fb
+        // Q6 quest: OS logo
         /* STUDENT_TODO: your code here */
         fbs->width=mbox[5];
-        // save height 
         /* STUDENT_TODO: your code here */
         fbs->vwidth=mbox[10];
         fbs->vheight=mbox[11];        
         fbs->depth=mbox[20]; 
-        fbs->isrgb=mbox[24];     // channel order        
-        // save pitch
+        fbs->isrgb=mbox[24];     // channel order
         /* STUDENT_TODO: your code here */
         if(fbs->pitch * fbs->vheight > mbox[29])  // possible that pitch*vheight < actual allocation
             {W("pitch %d x vheight %d!= mbox[29] %u", fbs->pitch, fbs->vheight, mbox[29]);BUG();}
@@ -425,7 +422,7 @@ void fb_showpicture()
     ptr += (the_fb.vwidth-img_fb_width)/2*PIXELSIZE;  // top center
     ptr += (the_fb.vheight-img_fb_height)/2*the_fb.pitch; 
     
-    // quest: OS logo
+    // Q6 quest: OS logo
     for(y=0;y<img_fb_height;y++) {
         for(x=0;x<img_fb_width;x++) {
             HEADER_PIXEL(data, pixel);

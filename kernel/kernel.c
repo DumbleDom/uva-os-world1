@@ -19,31 +19,31 @@ void uart_send_string(char* str);
 struct cpu cpus[NCPU]; 
 
 void kernel_main() {
-	// quest: UART. call uart_init() to initialize
+	// Q4 quest
 	/* STUDENT_TODO: your code here */
-	// quest: UART. init printf by init_printf(NULL, XXX)
+	// Q4 quest
 	/* STUDENT_TODO: your code here */
 	printf("------ kernel boot ------  core %d\n\r", cpuid());
 	printf("build time (kernel.c) %s %s\n", __DATE__, __TIME__); // simplicity 
 
 	sys_timer_init();                   // kernel timer: delay, timekeeping...
 	enable_interrupt_controller(0);     // coreid
-	// quest: sys_timer irq
+	// Q5 quest: sys_timer irq
 	/* STUDENT_TODO: your code here */
 
 	generic_timer_init();               // periodic ticks alive
 
 	if (fb_init() != 0) BUG();          // will show the OS logo
 
-	// test_ktimer();
-	// test_fb_voffset();               // cycle through color quads
+	// Q11 test_ktimer();
+	// Q8 test_fb_voffset();               // cycle through color quads
 	/* STUDENT_TODO: your code here */
 
-	// quest: pixel donut. call donut_simple()
+	// Q10 quest: pixel donut. call donut_simple()
 	/* to enable it,  irq handler must be modified to call sys_timer_irq_simple() */
 	/* STUDENT_TODO: your code here */
 	
-	// quest: textual donut. call donut_text()
+	// Q5 quest: textual donut. call donut_text()
 	/* STUDENT_TODO: your code here */
 
 	while (1)

@@ -94,7 +94,7 @@ void handle_generic_timer_irq(void)  {
 // NB: use current_time() below to get converted time
 // static inline 
 unsigned long current_counter() {
-	// quest: textual donut. 
+	// Q5 quest: textual donut. 
 	// read from TIMER_CHI and TIMER_CLO and return a 64bit counter
 	// (assume these two are consistent, since the clock is only 1MHz)
 return 0; /* STUDENT_TODO: replace this */
@@ -131,13 +131,13 @@ static void sys_timer_tune_delay() {
 	I("cycles_per_us %u cycles_per_ms %u", cycles_per_us, cycles_per_ms);
 }
 
-// quest: textual donut. implement by calling delay()
+// Q5 quest: textual donut
 void ms_delay(unsigned ms) {
 	BUG_ON(!cycles_per_ms);
 	/* STUDENT_TODO: your code here */
 }
 
-// quest: textual donut. implement by calling delay()
+// Q5 quest: textual donut
 void us_delay(unsigned us) {
 	BUG_ON(!cycles_per_us);
 	/* STUDENT_TODO: your code here */
@@ -223,7 +223,7 @@ static int adjust_sys_timer(void)
 	// the compare reg is only 32 bits so we have to ignore the high 32 bits of
 	// the counter. this is ok even if the low 32 bits have to wrap around 
 	// in order to match TIMER_C1 (cf the isr)	
-	/* STUDENT_TODO: your code here */
+	/* Q11 STUDENT_TODO: your code here */
 
 	return 0; 
 }
@@ -330,7 +330,7 @@ void sys_timer_irq(void)
 		if (timers[t].elapseat <= cur) { // should fire  
 			// W("called, id %d h %lx", t, (unsigned long)timers[t].handler);	
 			// NB: exec the callback w/ timerlock held
-			// quest (side): virtual timers
+			// Q11 quest (side): virtual timers
 ret = 0; /* STUDENT_TODO: replace this */
 			if (ret==1) { // restart the ktimer in place
 timers[t].elapseat = 0; /* STUDENT_TODO: replace this */

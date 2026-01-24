@@ -47,7 +47,7 @@
 	b	\label
 	.endm
 
-	// quest: sys_timer irq. complete below, cf kernel_exit() below 
+	// Q9 quest: sys_timer irq. complete below, cf kernel_exit() below 
 	.macro	kernel_entry
 	/* The first thing to do in handling an exception: saving the processor
 	state, notably registers x0 - x30, to the stack. subtracts from `sp` the
@@ -92,7 +92,7 @@
 	the kernel defines 16 exception handlers: 4 types [sync, irq, fiq, serror]
 	    for each of the CPU 4 execution states [EL1t, EL1h, EL0_64, EL0_32]. 
 */	
-// quest: sys_timer irq. place el1_irq in the vector table
+// Q9 quest: sys_timer irq. place el1_irq in the vector table
 .align	11
 .globl vectors 
 vectors:

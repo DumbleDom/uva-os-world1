@@ -62,7 +62,6 @@ el1_entry:
 	/* Below: clean up bss region. 
 	  bss_begin/end must be 8 bytes aligned, per the linker script */
 	// quest: boot
-	/* STUDENT_TODO: your code here */
 	bl 	memzero_aligned
 	
 setup_sp: 	

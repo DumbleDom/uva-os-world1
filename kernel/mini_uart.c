@@ -50,10 +50,9 @@
 // quest: UART. complete below cf uart_recv()
 void uart_send (char c) {
 	while(1) {
-        // read the status reg to check if the tx fifo is empty
-			/* STUDENT_TODO: your code here */
+			/* Q4  STUDENT_TODO: your code here */
 	}
-	/* STUDENT_TODO: your code here */
+	/* Q4  STUDENT_TODO: your code here */
 }
  
 // busy wait until get a char 

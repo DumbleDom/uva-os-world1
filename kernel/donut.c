@@ -145,7 +145,7 @@ void donut_simple(void) {
 
 extern unsigned long current_counter(); // timer.c, dirty. 
 
-//quest: Pixel donut. 
+// Q10 quest: Pixel donut. 
 void sys_timer_irq_simple(void) 
 {
 	unsigned long cur; 

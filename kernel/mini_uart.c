@@ -50,9 +50,13 @@
 // quest: UART. complete below cf uart_recv()
 void uart_send (char c) {
 	while(1) {
-			/* Q4  STUDENT_TODO: your code here */
+		/* Q4  STUDENT_TODO: your code here */
+		uint32_t lsr = *(volatile uint32_t*)AUX_MU_LSR_REG;
+		if(IS_TRANSMITTER_EMPTY(lsr))
+			break;
 	}
 	/* Q4  STUDENT_TODO: your code here */
+	*(volatile uint32_t *)AUX_MU_IO_REG = (uint32)c;
 }
  
 // busy wait until get a char 

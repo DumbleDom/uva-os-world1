@@ -63,7 +63,7 @@ el1_entry:
 	  bss_begin/end must be 8 bytes aligned, per the linker script */
 	// quest: boot
 	
-	ldr x0, =bss_start  //load bss_start into x0 as required by memzero_aligned
+	ldr x0, =bss_begin  //load bss_begin into x0 as required by memzero_aligned
 	ldr x1, =bss_end  //load bss_end into x1
 	sub x1, x1, x0  //X1 is the size of the bss as required by memzero_aligned
 
@@ -71,10 +71,11 @@ el1_entry:
 	
 setup_sp: 	
 	// quest: boot. set sp to somewhere above PHYS_BASE, far away from kernel image
-	/* STUDENT_TODO: your code here */
-	// NB: we aren't use sp yet -- until we start to execute kernel_main(below)
-	ldr sp, =kernel_end
+	ldr x3, =kernel_end
+	mov sp, x3
+	mov x3, #0
 	add sp, sp, #4096
+	// NB: we aren't use sp yet -- until we start to execute kernel_main(below)
 	
 	// install irq vectors
 	ldr x0, =vectors	// load VBAR_EL1 vector table addr

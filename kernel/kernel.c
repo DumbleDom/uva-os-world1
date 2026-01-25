@@ -13,6 +13,7 @@ extern void test_fb_voffset(); // unittests.c
 extern void donut();           // donut.c
 extern void donut_simple();    // donut.c
 extern void donut_text();      // donut.c
+extern void putc(void* p, char c);// mini_uart.c
 
 void uart_send_string(char* str);
 
@@ -22,7 +23,7 @@ void kernel_main() {
 	// Q4 quest
 	uart_init();
 	// Q4 quest
-	init_printf();
+	init_printf(NULL, putc);
 	printf("------ kernel boot ------  core %d\n\r", cpuid());
 	printf("build time (kernel.c) %s %s\n", __DATE__, __TIME__); // simplicity 
 

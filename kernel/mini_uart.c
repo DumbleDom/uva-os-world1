@@ -35,7 +35,7 @@
 #define AUX_MU_MCR_REG  (PBASE+0x00215050)
 
 #define AUX_MU_LSR_REG  (PBASE+0x00215054)
-  #define IS_TRANSMITTER_EMPTY(x) (x & 0x10)
+  #define IS_TRANSMITTER_EMPTY(x) (x & 0x40)
   #define IS_TRANSMITTER_IDLE(x)  (x & 0x20)
   #define IS_DATA_READY(x) (x & 0x1)
   #define IS_RECEIVER_OVEERUN(x) (x & 0x2)

@@ -196,7 +196,7 @@ void donut_text(void) {
                     // luminance_index is now in the range 0..11 (8*sqrt(2) = 11.3)
                     // now we lookup the character corresponding to the
                     // luminance and plot it in our output:
-                    b[o] = ".,-~:;=!*#$@"[N > 0 ? N : 0];
+                    b[o] = ".,-~:;=0$X@#"[N > 0 ? N : 0];
                 }
                 R(5, 8, ci, si) // rotate i
             }

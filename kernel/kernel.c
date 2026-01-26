@@ -30,7 +30,7 @@ void kernel_main() {
 	sys_timer_init();                   // kernel timer: delay, timekeeping...
 	enable_interrupt_controller(0);     // coreid
 	// Q5 quest: sys_timer irq
-	/* STUDENT_TODO: your code here */
+	donut_text();
 
 	generic_timer_init();               // periodic ticks alive
 

@@ -25,8 +25,8 @@ void kernel_main() {
 	// Q4 quest
 	init_printf(NULL, putc);
 	printf("------ kernel boot ------  core %d\n\r", cpuid());
-	printf("build time (kernel.c) %s %s\n", __DATE__, __TIME__); // simplicity 
-
+	printf("build time (kernel.c) %s %s\n", __DATE__, __TIME__); // simplicity
+        
 	sys_timer_init();                   // kernel timer: delay, timekeeping...
 	enable_interrupt_controller(0);     // coreid
 	// Q5 quest: sys_timer irq

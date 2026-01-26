@@ -97,6 +97,7 @@ unsigned long current_counter() {
 	// Q5 quest: textual donut. 
 	// read from TIMER_CHI and TIMER_CLO and return a 64bit counter
 	// (assume these two are consistent, since the clock is only 1MHz)
+	unsigned long timer = ((unsigned long)get32(TIMER_CHI) << 32) + get32(TIMER_CLO);
 return 0; /* STUDENT_TODO: replace this */
 }
 
@@ -135,12 +136,16 @@ static void sys_timer_tune_delay() {
 void ms_delay(unsigned ms) {
 	BUG_ON(!cycles_per_ms);
 	/* STUDENT_TODO: your code here */
+	for(unsigned i = 0; i < ms; i++)
+	        for(volatile unsigned j = 0; j < cycles_per_ms; j++);
 }
 
 // Q5 quest: textual donut
 void us_delay(unsigned us) {
 	BUG_ON(!cycles_per_us);
 	/* STUDENT_TODO: your code here */
+	for(unsigned i = 0; i < us; i++)
+	        for(volatile unsigned j = 0; j < cycles_per_us; j++);
 }
 
 // can only be called after va is on, timers are init'd

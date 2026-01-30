@@ -30,14 +30,14 @@ void kernel_main() {
 	sys_timer_init();                   // kernel timer: delay, timekeeping...
 	enable_interrupt_controller(0);     // coreid
 	// Q5 quest: sys_timer irq
-	donut_text();
+	//donut_text();
 
 	generic_timer_init();               // periodic ticks alive
-
+  enable_irq(); 
 	if (fb_init() != 0) BUG();          // will show the OS logo
 
 	// Q11 test_ktimer();
-	// Q8 test_fb_voffset();               // cycle through color quads
+	//test_fb_voffset();               // cycle through color quads
 	/* STUDENT_TODO: your code here */
 
 	// Q10 quest: pixel donut. call donut_simple()

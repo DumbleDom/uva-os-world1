@@ -276,13 +276,16 @@ static int do_fb_init(struct fb_struct *fbs) {
         mbox[28]&=0x3FFFFFFF;  
         // Q6 quest: OS logo
         /* STUDENT_TODO: your code here */
+        fbs->fb=(void *)(uintptr_t)mbox[28];
         fbs->width=mbox[5];
         /* STUDENT_TODO: your code here */
+        fbs->height=mbox[6];
         fbs->vwidth=mbox[10];
         fbs->vheight=mbox[11];        
         fbs->depth=mbox[20]; 
         fbs->isrgb=mbox[24];     // channel order
         /* STUDENT_TODO: your code here */
+        fbs->pitch=mbox[33];
         if(fbs->pitch * fbs->vheight > mbox[29])  // possible that pitch*vheight < actual allocation
             {W("pitch %d x vheight %d!= mbox[29] %u", fbs->pitch, fbs->vheight, mbox[29]);BUG();}
         fbs->size = PGROUNDUP(fbs->pitch * fbs->vheight);  // roundup b/c we'll reserve pages for it
@@ -413,14 +416,19 @@ void fb_showpicture()
     unsigned char *ptr=the_fb.fb;
     char *data=IMG_DATA, pixel[4];
     char res[16]; 
+    
 
     // fill framebuf. crop img data per the framebuf size
     unsigned int img_fb_height = the_fb.vheight < IMG_HEIGHT ? the_fb.vheight : IMG_HEIGHT; 
     unsigned int img_fb_width = the_fb.vwidth < IMG_WIDTH ? the_fb.vwidth : IMG_WIDTH; 
 
     // copy the image pixels to the start (top) of framebuf    
-    ptr += (the_fb.vwidth-img_fb_width)/2*PIXELSIZE;  // top center
-    ptr += (the_fb.vheight-img_fb_height)/2*the_fb.pitch; 
+    ptr += (the_fb.vwidth-img_fb_width)/2*PIXELSIZE;
+    ptr += (the_fb.vheight-img_fb_height)/2*the_fb.pitch;
+    unsigned int y_off =
+    (the_fb.vheight - img_fb_height) / 2;
+
+
     
     // Q6 quest: OS logo
     for(y=0;y<img_fb_height;y++) {
@@ -432,15 +440,26 @@ void fb_showpicture()
             // extract r,g,b from "pixel", then assign that to *ptr
             // if you color does not look right, check "isrgb" in the_fb
             /* STUDENT_TODO: your code here */
+            uint32_t color;
+            if (the_fb.isrgb) {
+              color = (pixel[0] << 16) | (pixel[1] << 8) | pixel[2];
+            } else {
+              color = (pixel[2] << 16) | (pixel[1] << 8) | pixel[0];
+            }
+            *(uint32_t *)ptr = color;
+            ptr += 4;
         }
         // advance ptr to the start of the next line of the pixels
         /* STUDENT_TODO: your code here */
-    }
+        ptr += the_fb.pitch - img_fb_width * 4;
 
+    }
     // show text strings
     // quest: OS logo. 
     // adjust x/y so that the text starts from right below the picture     
     /* STUDENT_TODO: your code here */
+    x = 0;
+    y = img_fb_height+ y_off + 8;
     fb_print(&x, &y, "UVA OS");    
     sprintf(res, " %dx%d", the_fb.width, the_fb.height); // debug info 
     fb_print(&x, &y, res);

@@ -5,17 +5,7 @@
 #include "plat.h"
 #include "utils.h"
 #include "debug.h"
-void __asm_flush_dcache_range(void *start, void *end) {
-    uintptr_t addr = (uintptr_t)start & ~63UL;  // cache-line align
-    uintptr_t last = (uintptr_t)end;
 
-    for (; addr < last; addr += 64) {
-        asm volatile ("dc civac, %0" :: "r"(addr) : "memory");
-    }
-
-    asm volatile ("dsb ish");
-    asm volatile ("isb");
-}
 
 
 
@@ -152,9 +142,9 @@ static inline void setpixel(unsigned char *buf, int x, int y, int pit, PIXEL p) 
     quadrants won't display correctly, likely due to a QEMU bug.
 */ 
 void test_fb_voffset() {
-    fb_showpicture();        // works
+    //fb_showpicture();        // works
 
-    acquire(&mboxlock);      //it's a test. so no lock
+    //acquire(&mboxlock);      //it's a test. so no lock
 
     fb_fini(); 
 

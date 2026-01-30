@@ -32,9 +32,10 @@ void kernel_main() {
 	// Q5 quest: sys_timer irq
 	//donut_text();
 	generic_timer_init();               // periodic ticks alive
-  enable_irq();
 	if (fb_init() != 0) BUG();          // will show the OS logo
-  donut_simple();
+  enable_irq();   //Put this above fb_init and get rid of the comment lines to see donut simple. 
+  //If you just want to see the logo you can just get rid of the comment lines and put it bellow fb_init
+  donut_simple(); //get rid of comment lines and follow comments above to see donut_simple
 	// Q11 test_ktimer();
 	//test_fb_voffset();               // cycle through color quads
 	/* STUDENT_TODO: your code here */

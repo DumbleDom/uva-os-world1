@@ -31,11 +31,10 @@ void kernel_main() {
 	enable_interrupt_controller(0);     // coreid
 	// Q5 quest: sys_timer irq
 	//donut_text();
-
 	generic_timer_init();               // periodic ticks alive
-  enable_irq(); 
+  enable_irq();
 	if (fb_init() != 0) BUG();          // will show the OS logo
-
+  donut_simple();
 	// Q11 test_ktimer();
 	//test_fb_voffset();               // cycle through color quads
 	/* STUDENT_TODO: your code here */

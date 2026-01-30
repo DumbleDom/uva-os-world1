@@ -148,13 +148,14 @@ extern unsigned long current_counter(); // timer.c, dirty.
 // Q10 quest: Pixel donut. 
 void sys_timer_irq_simple(void) 
 {
-	unsigned long cur; 
     BUG_ON(!(get32(TIMER_CS) & TIMER_CS_M1));  
 	put32(TIMER_CS, TIMER_CS_M1);	// clear timer1 match
     draw_frame(0, 0, 0); 
-    cur = current_counter(); 
     // reset the timer to fire in the future
 	/* STUDENT_TODO: your code here */
+  uint32_t now = get32(TIMER_CLO);
+  put32(TIMER_C1, now + 100 * 1000);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

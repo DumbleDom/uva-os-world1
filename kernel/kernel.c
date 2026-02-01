@@ -31,22 +31,15 @@ void kernel_main() {
 	enable_interrupt_controller(0);     // coreid
 	// Q5 quest: sys_timer irq
 	//donut_text();
+	// Q11 test_ktimer();
+	//test_fb_voffset();               // cycle through color quads
+	test_ktimer();
 	generic_timer_init();               // periodic ticks alive
 	if (fb_init() != 0) BUG();          // will show the OS logo
   enable_irq();   //Put this above fb_init and get rid of the comment lines to see donut simple. 
   //If you just want to see the logo you can just get rid of the comment lines and put it bellow fb_init
   donut_simple(); //get rid of comment lines and follow comments above to see donut_simple
-	// Q11 test_ktimer();
-	//test_fb_voffset();               // cycle through color quads
-	/* STUDENT_TODO: your code here */
-
-	// Q10 quest: pixel donut. call donut_simple()
-	/* to enable it,  irq handler must be modified to call sys_timer_irq_simple() */
-	/* STUDENT_TODO: your code here */
 	
-	// Q5 quest: textual donut. call donut_text()
-	/* STUDENT_TODO: your code here */
-
 	while (1)
 		asm volatile("wfi");            // what happen here?
 }

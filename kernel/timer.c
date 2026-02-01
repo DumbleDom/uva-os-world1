@@ -336,9 +336,13 @@ void sys_timer_irq(void)
 			// W("called, id %d h %lx", t, (unsigned long)timers[t].handler);	
 			// NB: exec the callback w/ timerlock held
 			// Q11 quest (side): virtual timers
-ret = 0; /* STUDENT_TODO: replace this */
+			ret = h(
+			    (TKernelTimerHandle)t, 
+			    timers[t].param, 
+			    timers[t].context
+			);
 			if (ret==1) { // restart the ktimer in place
-timers[t].elapseat = 0; /* STUDENT_TODO: replace this */
+			        timers[t].elapseat = cur + timers[t].interval;
 				adjust_sys_timer(); 
 			} else 
 				timers[t].handler = 0; 

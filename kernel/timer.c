@@ -229,7 +229,8 @@ static int adjust_sys_timer(void)
 	// the counter. this is ok even if the low 32 bits have to wrap around 
 	// in order to match TIMER_C1 (cf the isr)	
 	/* Q11 STUDENT_TODO: your code here */
-
+	put32(TIMER_C1, (unsigned int)(next & 0xFFFFFFFF));
+	
 	return 0; 
 }
 

@@ -61,8 +61,7 @@ void enable_interrupt_controller(int coreid)
 }
 
 void uart_irq(void); // mini_uart.c
-extern void sys_timer_irq_simple();    // donut.c
-
+//extern void sys_timer_irq_simple();    // donut.c
 
 // Q10 quest: pixel donut. call sys_timer_irq_simple() in the right place
 // called from hw irq handler (el1_irq, entry.S)
@@ -92,7 +91,8 @@ void handle_irq(void) {
         }        
         if (p1 & SYSTEM_TIMER_IRQ_1) {
             /* STUDENT_TODO: your code here */
-            sys_timer_irq_simple();
+            //sys_timer_irq_simple();
+            sys_timer_irq();
             p1 &= (~SYSTEM_TIMER_IRQ_1);
         }
         if (p1) {

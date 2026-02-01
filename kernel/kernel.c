@@ -36,10 +36,10 @@ void kernel_main() {
 	test_ktimer();
 	generic_timer_init();               // periodic ticks alive
 	if (fb_init() != 0) BUG();          // will show the OS logo
-  enable_irq();   //Put this above fb_init and get rid of the comment lines to see donut simple. 
-  //If you just want to see the logo you can just get rid of the comment lines and put it bellow fb_init
-  donut_simple(); //get rid of comment lines and follow comments above to see donut_simple
-	
+        enable_irq();   //Put this above fb_init and get rid of the comment lines to see donut simple. 
+        //If you just want to see the logo you can just get rid of the comment lines and put it bellow fb_init
+        //donut_simple(); //get rid of comment lines and follow comments above to see donut_simple
+	donut();
 	while (1)
 		asm volatile("wfi");            // what happen here?
 }

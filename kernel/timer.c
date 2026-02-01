@@ -97,8 +97,8 @@ unsigned long current_counter() {
 	// Q5 quest: textual donut. 
 	// read from TIMER_CHI and TIMER_CLO and return a 64bit counter
 	// (assume these two are consistent, since the clock is only 1MHz)
-	unsigned long timer = ((unsigned long)get32(TIMER_CHI) << 32) + get32(TIMER_CLO);
-return 0; /* STUDENT_TODO: replace this */
+	unsigned long timer = ((unsigned long)get32(TIMER_CHI) << 32) | get32(TIMER_CLO);
+        return timer;
 }
 
 ////////////  delay, timekeeping 
@@ -343,8 +343,7 @@ void sys_timer_irq(void)
 			    timers[t].context
 			);
 			if (ret==1) { // restart the ktimer in place
-			        timers[t].elapseat = cur + timers[t].interval;
-				adjust_sys_timer(); 
+			        timers[t].elapseat = cur + TICKPERMS * timers[t].delayms;
 			} else 
 				timers[t].handler = 0; 
 		}		
